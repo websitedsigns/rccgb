@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>RCCGB - Events</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-custom fixed-top shadow-sm">
+    <div class="container-fluid px-3">
+      <a class="navbar-brand" href="index.html">
+        <img src="images/logo.jpg" alt="RCCGB Logo" />
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto text-center">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link active" href="events.html">Events</a></li>
+          <li class="nav-item"><a class="nav-link" href="join.html">Join</a></li>
+          <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Spacer for fixed navbar -->
+  <div style="height: 80px;"></div>
+
+  <!-- Next Event -->
+  <section id="next-event" class="container py-4 text-center text-md-start">
+    <div class="d-flex flex-column flex-md-row align-items-center gap-3">
+      <img src="images/event1.jpg" alt="Folly Logo" class="img-fluid rounded shadow next-event-img" />
+      <div class="flex-grow-1">
+        <p class="lead mb-1">Join us for <strong>Folly Farm Fun Day</strong> on <strong>August 8th, 2025</strong></p>
+        <p class="booking-deadline text-danger fw-bold">Booking Deadline: 6th August 2025</p>
+        <div class="d-flex gap-2 justify-content-center justify-content-md-start mt-2">
+          <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#infoModal">More Info</button>
+          <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#bookingModal">Book Now</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Upcoming Events -->
+  <section id="upcoming-events" class="py-5 container">
+    <h2 class="text-primary text-center mb-4">Upcoming Events</h2>
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-6 g-3">
+      <!-- Next Event Card -->
+      <div class="col">
+        <div class="card shadow-lg border-danger position-relative h-100">
+          <span class="position-absolute top-0 start-0 bg-danger text-white px-2 py-1 fw-bold rounded">NEXT</span>
+          <img src="images/event1.jpg" class="card-img-top" alt="Folly Farm Fun Day" />
+          <div class="card-body text-center">
+            <h6>Folly Farm Fun Day</h6>
+            <p class="mb-0">August 8-9, 2025</p>
+          </div>
+        </div>
+      </div>
+      <!-- Other Events -->
+      <div class="col"><div class="card shadow-sm h-100"><img src="images/event2.jpg" class="card-img-top" alt="Woodathon" /><div class="card-body text-center"><h6>Woodathon</h6><p class="mb-1">Sept 27-28, 2025</p><p class="text-danger fw-bold">Booking Soon</p></div></div></div>
+      <div class="col"><div class="card shadow-sm h-100"><img src="images/event3.png" class="card-img-top" alt="Winter Wonderland" /><div class="card-body text-center"><h6>Winter Wonderland</h6><p class="mb-0">TBA</p></div></div></div>
+      <div class="col"><div class="card shadow-sm h-100"><img src="images/event4.jpg" class="card-img-top" alt="Ski Trip 2026" /><div class="card-body text-center"><h6>Ski Trip 2026</h6><p class="mb-0">TBA</p></div></div></div>
+      <div class="col"><div class="card shadow-sm h-100"><img src="images/event5.jpg" class="card-img-top" alt="Blackpool Bash 2026" /><div class="card-body text-center"><h6>Blackpool Bash 2026</h6><p class="mb-0">Apr 10-12, 2026</p></div></div></div>
+      <div class="col"><div class="card shadow-sm h-100"><img src="images/event6.jpg" class="card-img-top" alt="USA 2026" /><div class="card-body text-center"><h6>USA 2026</h6><p class="mb-0">Jun 10-21, 2026</p></div></div></div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer-bg text-white py-3 text-center mt-4">
+    &copy; 2025 RCCGB - Roller Coaster Club of Great Britain
+  </footer>
+
+  <!-- Info Modal -->
+  <div class="modal fade" id="infoModal" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content p-3">
+        <div class="modal-header">
+          <h5 class="modal-title">Folly Farm Fun Day - Information</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <p><strong>FRIDAY 8TH AUGUST - FOLLY FARM</strong><br>
+            A charming park in Pembrokeshire with a farm, zoo, and vintage funfair rides (Waltzers, Dodgems, Ghost Train, etc.).<br><br>
+            <strong>Cost:</strong> £39.95 (Under 12s - £34.95) incl. entry, fair session, and meal.<br><br>
+            <strong>SATURDAY 9TH AUGUST - HEATHERTON:</strong> Optional activities incl. Go-Kart (£25pp).<br><br>
+            More info: <a href="https://www.folly-farm.co.uk" target="_blank">www.folly-farm.co.uk</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Booking Modal -->
+  <div class="modal fade" id="bookingModal" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content p-3">
+        <div class="modal-header">
+          <h5 class="modal-title">Book Now - Folly Farm Fun Day</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <form id="bookingForm">
+            <div class="mb-3">
+              <label class="form-label">Number of Attendees</label>
+              <input type="number" id="attendees" class="form-control" min="1" value="1" required>
+            </div>
+            <div id="attendeeDetails"></div>
+            <button type="button" class="btn btn-outline-secondary mt-2" data-bs-toggle="modal" data-bs-target="#termsModal">View Terms</button>
+            <button type="submit" class="btn btn-warning w-100 mt-3">Confirm Booking</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Terms Modal -->
+  <div class="modal fade" id="termsModal" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content p-3">
+        <div class="modal-header">
+          <h5 class="modal-title">Trip Booking Terms & Conditions</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <p>Private event for RCCGB members only. All attendees must pay. No refunds for non-attendance. All activities at own risk unless negligence by the park.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Dynamic attendee fields
+    const attendeesInput = document.getElementById("attendees");
+    const attendeeDetails = document.getElementById("attendeeDetails");
+    attendeesInput.addEventListener("input", () => {
+      attendeeDetails.innerHTML = "";
+      for (let i=1; i<=parseInt(attendeesInput.value); i++) {
+        attendeeDetails.innerHTML += `
+          <div class="border rounded p-2 mb-3">
+            <h6>Attendee ${i}</h6>
+            <div class="mb-2">
+              <label class="form-label">Ticket Type</label>
+              <select class="form-select" required>
+                <option value="">Select...</option>
+                <option>Adult (£39.95)</option>
+                <option>Child (£34.95)</option>
+              </select>
+            </div>
+            <div class="mb-2">
+              <label class="form-label">Meal Choice</label>
+              <select class="form-select" required>
+                <option value="">Select...</option>
+                <option>Standard</option>
+                <option>Vegetarian</option>
+              </select>
+            </div>
+          </div>`;
+      }
+    });
+    attendeesInput.dispatchEvent(new Event("input"));
+  </script>
+</body>
+</html>
