@@ -264,3 +264,11 @@
   flex: 1 1 0;
   width: auto;
 }
+
+.renew {
+  background-color: #00247d;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  font-weight: bold;}
