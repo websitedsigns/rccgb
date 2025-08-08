@@ -203,7 +203,7 @@
   width: 70px;
   height: 70px;
   border-radius: 50%;
-  background: url('images/woodathonlogo.jpg') no-repeat center/cover;
+  background: url('images/woodathonlogo.png');
   border: 3px solid #ffeb3b;
   box-shadow: 0 0 15px rgba(255, 235, 59, 0.9), 0 0 25px rgba(255, 0, 0, 0.7);
   cursor: pointer;
