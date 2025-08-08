@@ -10,9 +10,31 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 </head>
 <body>
-<!-- Navbar container (will be filled by navbar.html) -->
-<div id="navbar-container"></div>
-
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg fixed-top navbar-custom">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">
+        <img src="images/logo.png" alt="RCCGB Logo" style="height:50px; width:auto; display:block; margin:0 auto;" class="d-block d-lg-inline mx-auto" />
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="Toggle navigation" style="border-color: white;">
+        <span class="navbar-toggler-icon" style="filter: invert(1);"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contact">Join</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contact">Trips</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contact">Club Information</a></li>
+          <li class="nav-item"><a class="nav-link" href="#events">Archives</a></li>
+          <li class="nav-item"><a class="nav-link" href="#trips">Useful Links</a></li>
+        </ul>
+        <!-- Social Icons to the right of the navbar -->
+        <div class="d-none d-lg-flex align-items-center ms-3"></div>
+        </ul>
+      </div>
+    </div>
+  </nav>
 
   <!-- Hero Banner -->
   <div class="hero-banner">
@@ -110,13 +132,5 @@
     reopenBtn.style.display = 'none';
     sticker.style.display = 'flex';
   </script>
-  <script>
-  fetch('navbar.html')
-    .then(response => response.text())
-    .then(data => {
-      document.getElementById('navbar-container').innerHTML = data;
-    });
-</script>
-
 </body>
 </html>
