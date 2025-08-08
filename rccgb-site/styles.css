@@ -42,9 +42,17 @@
 }
 
 .hero-title {
-  font-size: 3rem;
+  font-size: 4rem;
   font-weight: bold;
   z-index: 1;
+  margin-top: 50px;
+}
+
+@media (max-width: 600px) {
+  .hero-title {
+    font-size: 2.5rem;
+    margin-top: 20px;
+  }
 }
 
 .hero-subtitle {
@@ -56,6 +64,7 @@
 /* ===== Social Icons ===== */
 .social-icons {
   display: flex;
+  size: 1rem;
   gap: 1rem;
   z-index: 1;
 }
