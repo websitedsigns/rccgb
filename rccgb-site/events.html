@@ -6,67 +6,177 @@
   <title>RCCGB - Events</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* Small logo icon styling */
+    .event-logo {
+      height: 30px;
+      width: auto;
+      margin-right: 10px;
+      object-fit: contain;
+    }
+  </style>
 </head>
 <body>
   <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-custom fixed-top shadow-sm">
-    <div class="container-fluid px-3">
+  <nav class="navbar navbar-expand-lg fixed-top navbar-custom shadow-sm">
+    <div class="container">
       <a class="navbar-brand" href="index.html">
-        <img src="images/logo.jpg" alt="RCCGB Logo" />
+        <img src="images/logo.png" alt="RCCGB Logo" style="height:50px; width:auto;" />
       </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-        <span class="navbar-toggler-icon"></span>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="Toggle navigation" style="border-color: white;">
+        <span class="navbar-toggler-icon" style="filter: invert(1);"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto text-center">
-          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-          <li class="nav-item"><a class="nav-link active" href="events.html">Events</a></li>
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
           <li class="nav-item"><a class="nav-link" href="join.html">Join</a></li>
+          <li class="nav-item"><a class="nav-link" href="renew.html">Renew</a></li>
+          <li class="nav-item"><a class="nav-link" href="events.html">Events</a></li>
+          <li class="nav-item"><a class="nav-link" href="trips.html">Trips</a></li>
           <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+          <li class="nav-item"><a class="nav-link" href="info.html">Club Information</a></li>
+          <li class="nav-item"><a class="nav-link" href="archives.html">Archives</a></li>
+          <li class="nav-item"><a class="nav-link" href="links.html">Useful Links</a></li>
         </ul>
-      </div>
     </div>
   </nav>
+  <!-- Hero Banner (Narrow) -->
+  <div class="hero-banner hero-banner-narrow position-relative text-center" style="height: 250px; background: #00247d; display: flex; align-items: center; justify-content: center;">
+    <img src="images/logo.png" alt="RCCGB Logo" style="height:130px; width:auto; margin:0 auto;" class="d-block mx-auto" />
+  </div>
 
-  <!-- Spacer for fixed navbar -->
-  <div style="height: 80px;"></div>
+<section class="join-section py-5">
+  <div class="container">
+    <h1 class="hero-title text-center mb-3">Upcoming Events</h1>
+    <h2 class="text-center fw-bold text-primary mb-4">
+      Join us for exclusive trips and fun-packed events throughout the year!
+    </h2>
 
-  <!-- Next Event -->
-  <section id="next-event" class="container py-4 text-center text-md-start">
-    <div class="d-flex flex-column flex-md-row align-items-center gap-3">
-      <img src="images/event1.jpg" alt="Folly Logo" class="img-fluid rounded shadow next-event-img" />
-      <div class="flex-grow-1">
-        <p class="lead mb-1">Join us for <strong>Folly Farm Fun Day</strong> on <strong>August 8th, 2025</strong></p>
-        <p class="booking-deadline text-danger fw-bold">Booking Deadline: 6th August 2025</p>
-        <div class="d-flex gap-2 justify-content-center justify-content-md-start mt-2">
-          <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#infoModal">More Info</button>
-          <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#bookingModal">Book Now</button>
-        </div>
+<div class="card mb-5 shadow-sm border-primary position-relative overflow-hidden">
+  <!-- Background image covers entire card -->
+  <div class="position-absolute top-0 start-0 w-100 h-100" 
+       style="background: url('images/wickernight.jpg') no-repeat center center; background-size: cover; filter: brightness(0.5); z-index: 1;">
+  </div>
+  
+  <div class="row g-0 align-items-center position-relative" style="z-index: 2;">
+    <div class="col-md-4 text-center p-3">
+      <img src="images/woodathonlogo.png" alt="Woodathon" class="img-fluid rounded shadow-lg" style="position: relative; z-index: 3;" />
+    </div>
+    <div class="col-md-8 p-4 text-white">
+      <h3 class="text-primary fw-bold">Next Event: Woodathon 2025</h3>
+      <p class="lead mb-1"><strong>27th September - 28th September 2025</strong></p>
+      <p class="text-danger fw-semibold mb-3">Booking Deadline: 20th September 2025</p>
+      <button type="button" class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#woodathonModal">
+        More Info
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Woodathon Info Modal -->
+<div class="modal fade" id="woodathonModal" tabindex="-1" aria-labelledby="woodathonModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="woodathonModalLabel">Woodathon 2025 - Event Details</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p><strong>Woodathon 2025</strong> Join us for our annual weekend trip to Alton Towers and Drayton Manor. With the added extra this year that it takes place
+        over Scarefest opening weekend. So as well as our infamous ERS night rides on Nemesis, you also get to see Alton Towers in all its spooky gothic best. Scare zones and mazes around the park make this event one of the 
+      best in the country. 
+    followed on Sunday with a trip to Drayton Manor with 2 ERS and their famous lunch and Q&A</p>
+      </div>
+      <div class="modal-footer">
+        <a href="https://rccgb.digitickets.co.uk/category/15571" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+          Book Now
+        </a>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
       </div>
     </div>
-  </section>
+  </div>
+</div>
 
-  <!-- Upcoming Events -->
-  <section id="upcoming-events" class="py-5 container">
-    <h2 class="text-primary text-center mb-4">Upcoming Events</h2>
-    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-6 g-3">
-      <!-- Next Event Card -->
-      <div class="col">
-        <div class="card shadow-lg border-danger position-relative h-100">
-          <span class="position-absolute top-0 start-0 bg-danger text-white px-2 py-1 fw-bold rounded">NEXT</span>
-          <img src="images/event1.jpg" class="card-img-top" alt="Folly Farm Fun Day" />
-          <div class="card-body text-center">
-            <h6>Folly Farm Fun Day</h6>
-            <p class="mb-0">August 8-9, 2025</p>
+    <div class="accordion" id="eventsAccordion">
+
+      <!-- Winter Wonderland -->
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingWinter">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseWinter" aria-expanded="false" aria-controls="collapseWinter">
+            <img src="images/winterlogo.png" alt="Winter Wonderland Logo" class="event-logo" />
+            Winter Wonderland - TBA
+          </button>
+        </h2>
+        <div id="collapseWinter" class="accordion-collapse collapse" aria-labelledby="headingWinter" data-bs-parent="#eventsAccordion">
+          <div class="accordion-body d-flex flex-column flex-md-row align-items-center gap-3">
+            <img src="images/winterlogo.png" alt="Winter Wonderland" class="img-fluid rounded shadow-sm" style="max-width: 280px;" />
+            <div>
+              <p>Our unofficial meetup, we meet at park opening at Olympia Looping to get some club rides together
+                and then go off into the wonderland to enjoy the festive atmosphere and rides.</p>
+              </p>
+            </div>
           </div>
         </div>
       </div>
-      <!-- Other Events -->
-      <div class="col"><div class="card shadow-sm h-100"><img src="images/event2.jpg" class="card-img-top" alt="Woodathon" /><div class="card-body text-center"><h6>Woodathon</h6><p class="mb-1">Sept 27-28, 2025</p><p class="text-danger fw-bold">Booking Soon</p></div></div></div>
-      <div class="col"><div class="card shadow-sm h-100"><img src="images/event3.png" class="card-img-top" alt="Winter Wonderland" /><div class="card-body text-center"><h6>Winter Wonderland</h6><p class="mb-0">TBA</p></div></div></div>
-      <div class="col"><div class="card shadow-sm h-100"><img src="images/event4.jpg" class="card-img-top" alt="Ski Trip 2026" /><div class="card-body text-center"><h6>Ski Trip 2026</h6><p class="mb-0">TBA</p></div></div></div>
-      <div class="col"><div class="card shadow-sm h-100"><img src="images/event5.jpg" class="card-img-top" alt="Blackpool Bash 2026" /><div class="card-body text-center"><h6>Blackpool Bash 2026</h6><p class="mb-0">Apr 10-12, 2026</p></div></div></div>
-      <div class="col"><div class="card shadow-sm h-100"><img src="images/event6.jpg" class="card-img-top" alt="USA 2026" /><div class="card-body text-center"><h6>USA 2026</h6><p class="mb-0">Jun 10-21, 2026</p></div></div></div>
+
+      <!-- Ski Trip 2026 -->
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingSki">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSki" aria-expanded="false" aria-controls="collapseSki">
+            <img src="images/skilogo.jpg" alt="Ski Trip Logo" class="event-logo" />
+            Ski Trip 2026 - TBA
+          </button>
+        </h2>
+        <div id="collapseSki" class="accordion-collapse collapse" aria-labelledby="headingSki" data-bs-parent="#eventsAccordion">
+          <div class="accordion-body d-flex flex-column flex-md-row align-items-center gap-3">
+            <img src="images/event4.jpg" alt="Ski Trip 2026" class="img-fluid rounded shadow-sm" style="max-width: 280px;" />
+            <div>
+              <p>Details for the 2026 Ski Trip coming soon.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Blackpool Bash 2026 -->
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingBlackpool">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseBlackpool" aria-expanded="false" aria-controls="collapseBlackpool">
+            <img src="images/bash26logo.jpg" alt="Blackpool Bash Logo" class="event-logo" />
+            Blackpool Bash 2026 - 10-12 April 2026
+          </button>
+        </h2>
+        <div id="collapseBlackpool" class="accordion-collapse collapse" aria-labelledby="headingBlackpool" data-bs-parent="#eventsAccordion">
+          <div class="accordion-body d-flex flex-column flex-md-row align-items-center gap-3">
+            <img src="images/bash26logo.jpg" alt="Blackpool Bash 2026" class="img-fluid rounded shadow-sm" style="max-width: 280px;" />
+            <div>
+              <p>Our annual highlight is our weekend taking over Blackpool Pleasure Beach resort. From Celebrity performers, to club members participating
+                in the Gong show along with lunch, Talks and ERS throughout the 
+                weekend. This Years theme if you wanted to join us in Fancy dress on the 
+                Saturday night is Rock & Pop
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- USA 2026 -->
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingUSA">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseUSA" aria-expanded="false" aria-controls="collapseUSA">
+            <img src="images/usa26logo.jpg" alt="USA Trip Logo" class="event-logo" />
+            USA Trip 2026 - 10-21 June 2026
+          </button>
+        </h2>
+        <div id="collapseUSA" class="accordion-collapse collapse" aria-labelledby="headingUSA" data-bs-parent="#eventsAccordion">
+          <div class="accordion-body d-flex flex-column flex-md-row align-items-center gap-3">
+            <img src="images/usa26logo.jpg" alt="USA 2026" class="img-fluid rounded shadow-sm" style="max-width: 280px;" />
+            <div>
+              <p>Explore top USA parks with exclusive club experiences.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </section>
 
@@ -75,95 +185,6 @@
     &copy; 2025 RCCGB - Roller Coaster Club of Great Britain
   </footer>
 
-  <!-- Info Modal -->
-  <div class="modal fade" id="infoModal" tabindex="-1">
-    <div class="modal-dialog modal-lg modal-dialog-centered">
-      <div class="modal-content p-3">
-        <div class="modal-header">
-          <h5 class="modal-title">Folly Farm Fun Day - Information</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-        </div>
-        <div class="modal-body">
-          <p><strong>FRIDAY 8TH AUGUST - FOLLY FARM</strong><br>
-            A charming park in Pembrokeshire with a farm, zoo, and vintage funfair rides (Waltzers, Dodgems, Ghost Train, etc.).<br><br>
-            <strong>Cost:</strong> £39.95 (Under 12s - £34.95) incl. entry, fair session, and meal.<br><br>
-            <strong>SATURDAY 9TH AUGUST - HEATHERTON:</strong> Optional activities incl. Go-Kart (£25pp).<br><br>
-            More info: <a href="https://www.folly-farm.co.uk" target="_blank">www.folly-farm.co.uk</a>
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Booking Modal -->
-  <div class="modal fade" id="bookingModal" tabindex="-1">
-    <div class="modal-dialog modal-lg modal-dialog-centered">
-      <div class="modal-content p-3">
-        <div class="modal-header">
-          <h5 class="modal-title">Book Now - Folly Farm Fun Day</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-        </div>
-        <div class="modal-body">
-          <form id="bookingForm">
-            <div class="mb-3">
-              <label class="form-label">Number of Attendees</label>
-              <input type="number" id="attendees" class="form-control" min="1" value="1" required>
-            </div>
-            <div id="attendeeDetails"></div>
-            <button type="button" class="btn btn-outline-secondary mt-2" data-bs-toggle="modal" data-bs-target="#termsModal">View Terms</button>
-            <button type="submit" class="btn btn-warning w-100 mt-3">Confirm Booking</button>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Terms Modal -->
-  <div class="modal fade" id="termsModal" tabindex="-1">
-    <div class="modal-dialog modal-lg modal-dialog-centered">
-      <div class="modal-content p-3">
-        <div class="modal-header">
-          <h5 class="modal-title">Trip Booking Terms & Conditions</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-        </div>
-        <div class="modal-body">
-          <p>Private event for RCCGB members only. All attendees must pay. No refunds for non-attendance. All activities at own risk unless negligence by the park.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-  <script>
-    // Dynamic attendee fields
-    const attendeesInput = document.getElementById("attendees");
-    const attendeeDetails = document.getElementById("attendeeDetails");
-    attendeesInput.addEventListener("input", () => {
-      attendeeDetails.innerHTML = "";
-      for (let i=1; i<=parseInt(attendeesInput.value); i++) {
-        attendeeDetails.innerHTML += `
-          <div class="border rounded p-2 mb-3">
-            <h6>Attendee ${i}</h6>
-            <div class="mb-2">
-              <label class="form-label">Ticket Type</label>
-              <select class="form-select" required>
-                <option value="">Select...</option>
-                <option>Adult (£39.95)</option>
-                <option>Child (£34.95)</option>
-              </select>
-            </div>
-            <div class="mb-2">
-              <label class="form-label">Meal Choice</label>
-              <select class="form-select" required>
-                <option value="">Select...</option>
-                <option>Standard</option>
-                <option>Vegetarian</option>
-              </select>
-            </div>
-          </div>`;
-      }
-    });
-    attendeesInput.dispatchEvent(new Event("input"));
-  </script>
 </body>
 </html>
