@@ -228,3 +228,39 @@
     box-shadow: 0 0 15px rgba(255, 235, 59, 0.9), 0 0 25px rgba(255, 0, 0, 0.7);
   }
 }
+
+.join-section {
+  background: #f8f9fa;
+}
+
+.hero-title {
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 700;
+}
+
+.accordion-button {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.accordion-body {
+  font-size: 1rem;
+}
+
+.btn-lg {
+  padding: 0.8rem 1.5rem;
+  font-weight: bold;
+  width: 100%;
+  box-sizing: border-box;
+  background-color: red;
+}
+
+.button-group {
+  display: flex;
+  gap: 2rem;
+}
+
+.button-group .btn-lg {
+  flex: 1 1 0;
+  width: auto;
+}

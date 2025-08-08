@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Roller Coaster Club of Great Britain</title>
+  <title>Join the Roller Coaster Club of Great Britain</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" />
   <link rel="stylesheet" href="styles.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
@@ -36,66 +36,83 @@
     </div>
   </nav>
 
-  <!-- Hero Banner -->
-  <div class="hero-banner">
-    <div class="overlay"></div>
-    <img src="images/logo.png" alt="RCCGB Logo" style="height:100px; width:auto; display:block; margin:0 auto; position:absolute; top:140px; left:50%; transform:translateX(-50%);" class="d-block d-lg-inline mx-auto" />
-  
-
-    <h1 class="hero-title">Roller Coaster Club of Great Britain</h1>
-    <p class="hero-subtitle">Coaster Crazy Since 1988!</p>
-      <!-- Social Icons -->
-    <div class="social-icons">
-      <a href="#" class="social-link" aria-label="Facebook"><i class="fab fa-facebook-f fa-2x"></i></a>
-      <a href="#" class="social-link" aria-label="Instagram"><i class="fab fa-instagram fa-2x"></i></a>
-      <a href="#" class="social-link" aria-label="YouTube"><i class="fab fa-youtube fa-2x"></i></a>
-      <a href="#" class="social-link" aria-label="Twitter"><i class="fab fa-twitter fa-2x"></i></a>
-      <a href="#" class="social-link" aria-label="TikTok"><i class="fab fa-tiktok fa-2x"></i></a>     
-    </div>
-    
-    
-    <!-- Woodathon Floating Sticker -->
-    <button id="woodathon-sticker" aria-label="Woodathon Event" title="Show Woodathon event">
-    </button>
-
-    <!-- Woodathon Event Card -->
-    <div id="woodathon-card" role="dialog" aria-modal="true" aria-labelledby="woodathon-title" aria-describedby="woodathon-desc">
-      <button class="btn-close" aria-label="Close Woodathon event">&times;</button>
-      <h5 id="woodathon-title">Next Event: Woodathon</h5>
-      <p id="woodathon-desc">Join us Sept 27-28, 2025 for a thrilling weekend of coaster adventures!</p>
-      <a href="#" class="btn-join">Join the Trip</a>
-    </div>
-
-    <!-- Woodathon Reopen Button -->
-    <button id="woodathon-reopen" aria-label="Reopen Woodathon event" title="Show Woodathon event">+</button>
+  <!-- Hero Banner (Narrow) -->
+  <div class="hero-banner hero-banner-narrow position-relative text-center" style="height: 250px; background: #00247d; display: flex; align-items: center; justify-content: center;">
+    <img src="images/logo.png" alt="RCCGB Logo" style="height:130px; width:auto; margin:0 auto;" class="d-block mx-auto" />
   </div>
 
-  <!-- Welcome Section with Image Grid -->
-  <section id="welcome-content" class="container">
-    <div class="row align-items-start">
-      <!-- Image Grid -->
-      <div class="col-lg-6 mb-4 mb-lg-0">
-        <div class="row g-3">
-          <div class="col-6"><img src="images/photo1.jpg" class="img-fluid rounded shadow-sm" alt="Grid Image 1"></div>
-          <div class="col-6"><img src="images/photo2.jpg" class="img-fluid rounded shadow-sm" alt="Grid Image 2"></div>
-          <div class="col-6"><img src="images/photo3.jpg" class="img-fluid rounded shadow-sm" alt="Grid Image 3"></div>
-          <div class="col-6"><img src="images/photo4.jpg" class="img-fluid rounded shadow-sm" alt="Grid Image 4"></div>
-          <div class="col-6"><img src="images/photo5.jpg" class="img-fluid rounded shadow-sm" alt="Grid Image 5"></div>
-          <div class="col-6"><img src="images/photo6.jpg" class="img-fluid rounded shadow-sm" alt="Grid Image 6"></div>
+<section class="join-section py-5">
+  <div class="container">
+    <h1 class="hero-title text-center mb-3">Join the RCCGB</h1>
+    <h2 class="text-center fw-bold text-primary mb-4">
+      Become part of the Roller Coaster Club of Great Britain
+    </h2>
+
+    <p class="text-center mb-4">
+      Get exclusive trip invites, our monthly AIRtime ONline e-magazine, discounts, and more!
+    </p>
+
+    <div class="accordion" id="joinAccordion">
+
+      <!-- Membership Details -->
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingDetails">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseDetails" aria-expanded="false" aria-controls="collapseDetails">
+            Membership Details
+          </button>
+        </h2>
+        <div id="collapseDetails" class="accordion-collapse collapse" aria-labelledby="headingDetails" data-bs-parent="#joinAccordion">
+          <div class="accordion-body">
+            <p>The <strong>2025 membership year</strong> runs from <strong>1 February 2025</strong> to <strong>31 January 2026</strong>.</p>
+            <p>Annual membership is just <strong>£16</strong> — that’s <strong>12 editions</strong> of AIRtime ONline, all trip invites, and your exclusive membership card for just over <strong>£1.30 a month</strong>!</p>
+            <p>Membership renewal is now open for 2025 — cards arrive within two weeks after renewal.</p>
+          </div>
         </div>
       </div>
-      <!-- Text -->
-      <div class="col-lg-6">
-        <h2 class="text-center fw-bold mb-4" style="color: #00247d;">Welcome Coaster Crazy Enthusiast!</h2>
-        <p>You've arrived at the home of 'The Roller Coaster Club of Great Britain' - Europe's most popular coaster club*.</p>
-        <p>We are a social club that unites roller coaster enthusiasts from all over the world who like to add extra FUN into the already fun packed world of roller coasters! With over 1000 members from 15 different countries it's the club to be in if you want to meet people of all ages who, like you, have a passion for riding roller coasters.</p>
-        <p>On this site you'll find all sorts of information about the club, our upcoming trips, trip reports, back issues of our old printed club magazine AIRtime, useful links, and information to help expand your coaster knowledge.</p>
-        <p>If you're already a member, have a browse and enjoy reliving memories of the trips you have attended, look up the next club trip or checkout the latest club news. If you're not yet a member, have a look and see what fun we get up to, then if you like what you see, visit the join page and you could soon be shouting "Coaster Crazy!" with the rest of us at any of our great club trips!</p>
-        <p><strong>Andy Hine MBE, Chairman & Founder</strong></p>
-        <p><em>* based on average trip attendance</em></p>
+
+      <!-- Family Membership -->
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingFamily">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFamily" aria-expanded="false" aria-controls="collapseFamily">
+            Family Membership
+          </button>
+        </h2>
+        <div id="collapseFamily" class="accordion-collapse collapse" aria-labelledby="headingFamily" data-bs-parent="#joinAccordion">
+          <div class="accordion-body">
+            <p>Up to 5 members (lead + 4) living at the same address can join together. The lead member pays £16, with each additional member just £2.</p>
+            <p>Please provide a separate email address for each member to receive AIRtime ONline.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- What's Included -->
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingIncludes">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseIncludes" aria-expanded="false" aria-controls="collapseIncludes">
+            What’s Included
+          </button>
+        </h2>
+        <div id="collapseIncludes" class="accordion-collapse collapse" aria-labelledby="headingIncludes" data-bs-parent="#joinAccordion">
+          <div class="accordion-body">
+            <ul>
+              <li><strong>Club Membership Card</strong> — deals & discounts at theme parks*</li>
+              <li><strong>Monthly AIRtime ONline</strong> — club, trip & coaster news direct to your inbox</li>
+              <li><strong>Exclusive Trip Invitations</strong> — UK, European & USA park trips</li>
+              <li><strong>Members Handbook</strong> — 20 pages of coaster history & tips (new members)</li>
+              <li><strong>Exclusive Merchandise</strong> — T-shirts, jackets, mugs & more at major events</li>
+            </ul>
+            <p class="small">*Offers vary throughout the year — see AIRtime ONline or our discounts page for details.</p>
+          </div>
+        </div>
       </div>
     </div>
-  </section>
+
+    <!-- CTA Buttons -->
+    <div class="text-center mt-4">
+      <a href="#join" class="btn btn-primary btn-lg me-2">Join Now</a>
+    </div>
+  </div>
+</section>
 
   <!-- Footer -->
   <footer class="footer-bg">
