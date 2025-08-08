@@ -2,38 +2,159 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Club Information - RCCGB</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
-  <link href="styles.css" rel="stylesheet" />
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
+  <title>Join the Roller Coaster Club of Great Britain</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <style>
     /* Cursor pointer for logos */
     .logo-item {
       cursor: pointer;
       transition: box-shadow 0.3s ease;
+      user-select: none;
+      max-width: 100px;
+      padding: 0.5rem;
+      border: 1px solid transparent;
+      border-radius: 0.375rem;
+      background-color: transparent;
+      display: inline-block;
+      margin-right: 0.75rem;
+      text-align: center;
+      flex: 0 0 auto;
     }
-    .logo-item.selected, .logo-item:hover {
-      box-shadow: 0 0 8px 3px #00247d;
-      border-color: #00247d !important;
-      background-color: rgba(0,36,125,0.1);
+    .logo-item img {
+      display: block;
+      margin: 0 auto 0.5rem;
+      max-width: 80px;
+      height: auto;
     }
+    .logo-item small {
+      display: block;
+      font-size: 0.75rem;
+      line-height: 1.1;
+      white-space: normal; /* allow multiline */
+    }
+
+    /* Desktop selected and hover style only on desktop */
+    @media (min-width: 768px) {
+      .logo-item.selected, .logo-item:hover {
+        box-shadow: 0 0 8px 3px #00247d;
+        border-color: #00247d !important;
+        background-color: rgba(0,36,125,0.1);
+      }
+    }
+
     .history-text p {
       margin-bottom: 1rem;
     }
+
     /* Responsive adjustments */
     @media (max-width: 767.98px) {
-      .accordion-body.d-flex {
-        flex-direction: column !important;
+      /* Logos scroll horizontally */
+      .logo-container {
+        overflow-x: auto;
+        white-space: nowrap;
+        padding-bottom: 0.5rem;
       }
       .logo-item {
-        max-width: 80px !important;
+        margin-right: 0.5rem;
+        max-width: 100px;
       }
       .logo-item small {
         font-size: 0.7rem;
       }
+
+      /* Big roller coaster text container on mobile */
+      .container.d-block.d-md-none {
+        font-size: 0.95rem;
+        line-height: 1.5;
+        max-height: 400px;
+        overflow-y: auto;
+        background: #f8f9fa;
+        border-radius: 0.375rem;
+        padding: 1rem;
+        box-shadow: 0 0 8px rgba(0,0,0,0.1);
+        margin-top: 1rem;
+      }
     }
+
+    /* Overlay styles */
+    #logoInfoOverlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.7);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 1050;
+    }
+    #logoInfoPanel {
+      background: white;
+      padding: 1rem 1.5rem;
+      max-width: 90vw;
+      max-height: 80vh;
+      overflow-y: auto;
+      border-radius: 0.375rem;
+      box-shadow: 0 0 15px rgba(0,0,0,0.3);
+      text-align: center;
+      position: relative;
+    }
+    #logoInfoPanel img {
+      max-width: 150px;
+      height: auto;
+      margin-bottom: 1rem;
+    }
+    #logoInfoClose {
+      position: absolute;
+      top: 0.5rem;
+      right: 0.75rem;
+      background: none;
+      border: none;
+      font-size: 2rem;
+      line-height: 1;
+      cursor: pointer;
+      color: #333;
+    }
+
+    .roller-coaster-text {
+  font-family: "Georgia", serif;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #222;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 1rem 1.5rem;
+  background-color: #fafafa;
+  border-radius: 2px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.roller-coaster-text p {
+  margin-bottom: 1rem;
+  text-align: justify;
+}
+
+.roller-coaster-text strong {
+  color: #00247d;
+  font-weight: 700;
+}
+
+.roller-coaster-text em {
+  display: block;
+  margin-top: 1.5rem;
+  font-style: italic;
+  color: #444;
+  text-align: center;
+  line-height: 1.4;
+}
+
+.list-disc {
+  list-style-type: disc;
+}
+
+
   </style>
 </head>
 <body>
@@ -74,199 +195,333 @@
 <section class="join-section py-5">
   <div class="container">
     <h1 class="hero-title text-center mb-3">Club Information</h1>
+    <h2 class="text-center fw-bold text-primary mb-4">
+    </h2>
 
-    <div class="accordion" id="infoAccordion">
+      <div class="accordion" id="infoAccordion">
 
-      <!-- Club and Coaster History with interactive logos -->
-      <div class="accordion-item">
-        <h2 class="accordion-header" id="headingHistory">
-          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHistory" aria-expanded="true" aria-controls="collapseHistory">
-            Club and Coaster History
-          </button>
-        </h2>
-        <div id="collapseHistory" class="accordion-collapse collapse show" aria-labelledby="headingHistory" data-bs-parent="#infoAccordion">
-          <div class="accordion-body d-flex flex-column flex-md-row" style="gap: 1.5rem;">
+        <!-- Club and Coaster History -->
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="headingHistory">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHistory" aria-expanded="true" aria-controls="collapseHistory">
+              Club and Coaster History
+            </button>
+          </h2>
+          <div id="collapseHistory" class="accordion-collapse collapse show" aria-labelledby="headingHistory" data-bs-parent="#infoAccordion">
+            <div class="accordion-body d-flex flex-column flex-md-row" style="gap: 1.5rem;">
 
-  <!-- Left: Logos vertically stacked on md+, horizontally scrollable on mobile -->
-<div class="d-flex flex-row flex-md-column align-items-center" 
-     style="min-width: 120px; overflow-x: auto; white-space: nowrap; padding-bottom: 0.5rem;">
-  <div class="logo-item text-center mb-3 p-2 border rounded selected" data-text="text1" 
-       style="max-width: 100px; user-select:none; flex: 0 0 auto; display: inline-block; margin-right: 0.75rem;">
-    <img src="images/OGlogo.jpg" alt="Original club logo 1988-2004" class="img-fluid mb-1" />
-    <small>Original Logo<br>1988-2004</small>
-  </div>
-  <div class="logo-item text-center mb-3 p-2 border rounded" data-text="text2" 
-       style="max-width: 100px; user-select:none; flex: 0 0 auto; display: inline-block; margin-right: 0.75rem;">
-    <img src="images/15logo.jpg" alt="15th Anniversary club logo 2003" class="img-fluid mb-1" />
-    <small>15th Anniversary<br>2003</small>
-  </div>
-  <div class="logo-item text-center mb-3 p-2 border rounded" data-text="text3" 
-       style="max-width: 100px; user-select:none; flex: 0 0 auto; display: inline-block; margin-right: 0.75rem;">
-    <img src="images/2ndlogo.png" alt="2nd version club logo 2005-2010" class="img-fluid mb-1" />
-    <small>2nd Version<br>2005-2010</small>
-  </div>
-  <div class="logo-item text-center mb-3 p-2 border rounded" data-text="text4" 
-       style="max-width: 100px; user-select:none; flex: 0 0 auto; display: inline-block; margin-right: 0.75rem;">
-    <img src="images/20thlogo.jpg" alt="20th Anniversary logo 2008" class="img-fluid mb-1" />
-    <small>20th Anniversary<br>2008</small>
-  </div>
-  <div class="logo-item text-center mb-3 p-2 border rounded" data-text="text5" 
-       style="max-width: 100px; user-select:none; flex: 0 0 auto; display: inline-block; margin-right: 0.75rem;">
-    <img src="images/3016776_orig.png" alt="3rd version logo 2010-2017" class="img-fluid mb-1" />
-    <small>3rd Version<br>2010-2017</small>
-  </div>
-  <div class="logo-item text-center mb-3 p-2 border rounded" data-text="text6" 
-       style="max-width: 100px; user-select:none; flex: 0 0 auto; display: inline-block; margin-right: 0.75rem;">
-    <img src="images/25logo.jpg" alt="25th Anniversary logo 2013" class="img-fluid mb-1" />
-    <small>25th Anniversary<br>2013</small>
-  </div>
-  <div class="logo-item text-center mb-3 p-2 border rounded" data-text="text7" 
-       style="max-width: 100px; user-select:none; flex: 0 0 auto; display: inline-block; margin-right: 0.75rem;">
-    <img src="images/30logo.jpg" alt="30th Anniversary logo 2018" class="img-fluid mb-1" />
-    <small>30th Anniversary<br>2018</small>
+              <!-- Logos container -->
+              <div class="logo-container d-flex flex-row flex-md-column align-items-center" style="min-width: 120px;">
+                <div class="logo-item selected" data-text="text1" data-img="images/OGlogo.jpg" tabindex="0" aria-label="Original Logo 1988-2004">
+                  <img src="images/OGlogo.jpg" alt="Original club logo 1988-2004" />
+                  <small>Original Logo<br>1988-2004</small>
+                </div>
+                <div class="logo-item" data-text="text2" data-img="images/15logo.jpg" tabindex="0" aria-label="15th Anniversary Logo 2003">
+                  <img src="images/15logo.jpg" alt="15th Anniversary club logo 2003" />
+                  <small>15th Anniversary<br>2003</small>
+                </div>
+                <div class="logo-item" data-text="text3" data-img="images/2ndlogo.png" tabindex="0" aria-label="2nd Version Logo 2005-2010">
+                  <img src="images/2ndlogo.png" alt="2nd version club logo 2005-2010" />
+                  <small>2nd Version<br>2005-2010</small>
+                </div>
+                <div class="logo-item" data-text="text4" data-img="images/20thlogo.jpg" tabindex="0" aria-label="20th Anniversary Logo 2008">
+                  <img src="images/20thlogo.jpg" alt="20th Anniversary logo 2008" />
+                  <small>20th Anniversary<br>2008</small>
+                </div>
+                <div class="logo-item" data-text="text5" data-img="images/3016776_orig.png" tabindex="0" aria-label="3rd Version Logo 2010-2017">
+                  <img src="images/3016776_orig.png" alt="3rd version logo 2010-2017" />
+                  <small>3rd Version<br>2010-2017</small>
+                </div>
+                <div class="logo-item" data-text="text6" data-img="images/25logo.jpg" tabindex="0" aria-label="25th Anniversary Logo 2013">
+                  <img src="images/25logo.jpg" alt="25th Anniversary logo 2013" />
+                  <small>25th Anniversary<br>2013</small>
+                </div>
+                <div class="logo-item" data-text="text7" data-img="images/30logo.jpg" tabindex="0" aria-label="30th Anniversary Logo 2018">
+                  <img src="images/30logo.jpg" alt="30th Anniversary logo 2018" />
+                  <small>30th Anniversary<br>2018</small>
+                </div>
+              </div>
+
+              <!-- Text area on desktop only -->
+              <div class="flex-grow-1 d-none" style="max-height: 600px; overflow-y: auto;">
+                <div id="text1" class="history-text d-none">
+                  <p>The Roller Coaster Club of Great Britain was founded in 1988 with the original club logo symbolising the start of the journey.</p>
+                </div>
+                <div id="text2" class="history-text d-none">
+                  <p>In 2003, the club celebrated its 15th anniversary with a special logo marking this milestone.</p>
+                </div>
+                <div id="text3" class="history-text d-none">
+                  <p>The club logo evolved further in 2005 reflecting the club’s growing community and activities.</p>
+                </div>
+                <div id="text4" class="history-text d-none">
+                  <p>Celebrating 20 years in 2008, the club proudly introduced this commemorative logo.</p>
+                </div>
+                <div id="text5" class="history-text d-none">
+                  <p>The logo was redesigned again in 2010 to keep pace with modern branding standards.</p>
+                </div>
+                <div id="text6" class="history-text d-none">
+                  <p>The 25th anniversary in 2013 was celebrated with a special edition logo, marking a quarter century of coaster enthusiasm.</p>
+                </div>
+                <div id="text7" class="history-text d-none">
+                  <p>In 2018, the club celebrated its 30th anniversary, commemorated by this modern logo.</p>
+                </div>
+              </div>
+              <!-- Big Roller Coaster text container, visible only on mobile -->
+    <div class="container d-block mt-4" style="max-height: 800px; overflow-y: auto;">
+      <div class="roller-coaster-text">
+  <p><strong>Roller Coasters</strong> - The King of the theme parks.</p>
+  <p>The new steel high-tech marvels now rise more than four hundred feet in the air with loops, 
+    corkscrews, boomerangs and other white-knuckle elements. 
+    All over the world they reach speeds of over 100mph with eager thrill seekers being able 
+    to ride sitting, standing or even suspended beneath the track. So where it all start?</p>
+  <p>Well the roots are still with us today - lattice wooden structures, steep rises, swooping 
+    drops and loads of shake, rattle and roll! Modern steel looping roller coasters and 
+    traditional wooden roller coasters may look different, but they still have one thing 
+    in common; they both exist to excite and thrill the riders.</p>
+  <p>It all began in the 15th and 16th century with Russian Mountains. These were ice 
+    slides constructed in Russian towns, some even as high as 70 feet! Both the track and 
+    sleds were made of ice, with the seating being straw stuffed in chiselled hollows. 
+    The first roller coaster with wheels was invented in Russia also, built in 1784 in St. Petersburg. 
+    Soon after, the rides made their way to Paris, where the first coaster attraction 
+    was opened in 1804. There were of course problems in these early days. Wheels often 
+    fell off and the cars did not always stop at the end of the track!</p>
+  <p>It was in Paris where the phrase "roller coaster" originated. The early rides used tracks 
+    made of rollers and sleds with runners - creating roller coasting. The name then remained 
+    after runners were replaced with wheels.</p>
+  <p>The first ride to resemble modern roller coasters as we know them today, opened in Paris in
+     1817. Called Promenades Aeriennes (Aerial Walks), it had two separate, continuous tracks and
+      the cars were locked onto the track. The first roller coaster in America was the Gravity 
+      Pleasure Switchback Railway built by La Marcus Thompson in 1884 at Coney Island, New York. 
+      The ride reached six miles per hour and riders sat sideways.</p>
+  <p>Inventors and designers were soon working to make coasters better and faster and in the 50's
+     tubular steel track was being used allowing riders to eventually be turned upside down. Now 
+     as theme park attendances rise, wooden coasters have become popular once again, too. These 
+     grand visions of the past now reach greater speeds and heights and can match their steel 
+     counterparts for extreme thrills. The Club continually strives to encourage UK manufacturers 
+     to build new wooden roller coasters to compliment their steel counterparts.</p>
+  <p>Today there are over 2400 different coasters in the world. Parks all over the world compete
+     to build the highest, the longest and the fastest rides. Cedar Point in Sandusky, Ohio (USA) 
+     a coaster enthusiasts dream with no less than 17 on offer, is home to Top Thrill Dragsters, 
+     a 420ft high steel coaster that reaches speeds of 120mph. In Australia they have T
+     he Tower of Terror, a 300ft free fall ride. Ring Racer in Germany hits 135mph and in the UK, 
+     Thorpe Park attracts riders with its record breaking 10 inversion coaster named Colossus. 
+     New designs are being introduced all the time. In recent years coasters have had their track 
+     turned upside down and the cars suspended underneath. Some coasters coaster have no seats 
+     and riders stand held in by special harnesses and more recently new 'laying down' coasters 
+     has been introduced. It seems that as long as we crave for more thrills the more the 
+     manufacturers try and give it to us.</p>
+  <p>This level of enthusiasm is shared the world over and roller coasters have a mass following.
+     So in August 1988, The Roller Coaster Club of Great Britain was created. The main aims were 
+     to unite coaster enthusiasts in a social way, promote amusement parks as fun and safe places 
+     and encourage parks and manufacturers to create and install new and more exciting and daring 
+     rides.</p>
+  <p>Since then membership has grown and currently has well over 1000 members in around 15 different 
+    countries. These coaster crazy members go to great lengths to get their coaster fix. The average 
+    Club member will have ridden over 100 different coasters, spent 8 hours in each park they have 
+    visited and ridden around 40 times in one day! Some of the longer term members who have done 
+    many Club trips, especially abroad have now ridden well over 1000 different coasters worldwide!</p>
+  <p>Since the first club events back in the late 1980's they have remained the key part of being 
+    a member. Each year the club organises at least 6 events. These include favourites such as the 
+    'Blackpool Bash', 'Loopathon', 'Mega-GLOW-Mania' and 'Summer Bash'. European trips have also 
+    been part of the trip calendar in past years with visits to Port Aventura, Six Flags Holland 
+    and Europa Park to name just a few. In 1993 the club did its first trip to the 
+    United States of America and this has since become a yearly event with one or two coach 
+    loads of members riding around 80-100 coasters in a 2 week trip!</p>
+  <p>So what about the future? How high or fast can roller coasters get? Well, the limits are 
+    really set by what the average human being can take. There comes a point where your body 
+    cannot take the extreme forces any longer and the ride no longer becomes fun. And the key 
+    word in the whole of the amusement industry is 'fun'. People visit parks to enjoy themselves, 
+    and forget about their daily troubles. You can go to work from Monday to Friday but come the 
+    weekend you can get away from it all and enter another world. A world of fun! Everywhere you 
+    look in a theme park people are smiling, laughing and of course screaming, with delight!</p>
+  <p>More and more coasters are appearing all over the world. Being a member of the RCCGB will 
+    mean that you get invitations to various Club trips to try out these new coasters. Attending 
+    trips is also the best way to make new friends who all share the same great pastime. Remember, 
+    on a Club trip each and every member is there to have a good time and within short while you'll
+     soon feel part of the 'Coaster Crazy' crowd!</p>
+  <p>So no matter what other thrill rides or adrenalin activities are invented, roller 
+    coasters will always be the King of the park and as a Club we will always do our best to
+     preserve existing coasters and encourage construction of new ones!</p>
+  <p><em>The ride may only last two minutes, but the memories last a lifetime!
+    <br />Andy Hine MBE<br />RCCGB Chairman</em></p>
+</div>
+
+
+
+            </div>
+          </div>
+        </div>
+
+        <!-- Code of Conduct -->
+<div class="accordion-item">
+  <h2 class="accordion-header" id="headingConduct">
+    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseConduct" aria-expanded="false" aria-controls="collapseConduct">
+      <span class="text-primary fw-bold">Code of Conduct</span>
+    </button>
+  </h2>
+  <div id="collapseConduct" class="accordion-collapse collapse" aria-labelledby="headingConduct" data-bs-parent="#infoAccordion">
+    <div class="accordion-body">
+      <p>
+        If you have just joined the club, I would like to offer a <strong class="text-danger">very big welcome</strong> to <span class="fw-bold text-primary">The Roller Coaster Club of Great Britain</span>. The social club where everyone enjoys the same great passion - <em class="text-success fst-italic">Roller Coasters!</em>
+      </p>
+      <p>
+        I sincerely hope that you will enjoy being a member of this coaster crazy bunch and will be able to join us on some of the great trips we have throughout each year.
+      </p>
+      <p>
+        <strong>Attending trips</strong> is the best way to meet your fellow members, make new friends and of course enjoy sharing the fun of riding together!
+      </p>
+
+      <p class="fst-italic text-muted mt-4">
+        Below, there are some general club rules and guidelines. The main rule though is that we all have fun together and enjoy the great creation that is:
+      </p>
+
+      <h3 class="text-primary fw-bold mt-3">The Roller Coaster</h3>
+
+      <h4 class="text-danger fw-bold mt-4">Club Rules & Regulations</h4>
+
+      <p><strong>Title:</strong> The full name of the Club is <strong>'The Roller Coaster Club of Great Britain'</strong> and hereafter on this page referred to as the <strong>'Club'</strong>.</p>
+
+      <p><strong>Abbreviation:</strong> The Club can be abbreviated to <strong>'RCCGB'</strong>.</p>
+
+      <p><strong>Objects & Aims:</strong> To unite enthusiasts in a fun and social way, to promote the fun and safety of amusement parks and attractions, to raise awareness of new rides and encourage parks to build them and finally to be ambassadors for the amusement industry.</p>
+
+      <p><strong>Management:</strong> The authority and responsibility for the transaction of the business of the Club shall be vested to <em>Andy Hine MBE</em> who may act in furtherance of the objects for which the Club is established.</p>
+
+      <p><strong>Volunteers:</strong> Volunteer Members assist in various duties.</p>
+
+      <p><strong>Banking:</strong> All monies of the Club shall be banked in the name of the Club and sufficient records of all transactions shall be kept.</p>
+
+      <p><strong>Membership Fees:</strong> Every member of the Club (except Life members and Honorary Members) shall pay subscription at the applicable rate. Membership fees are payable annually. Unfortunately, it is not possible to refund membership fees during the membership year.</p>
+
+      <p><strong>Non-payment:</strong> Any member who has not paid their subscription within 2 months of receiving their renewal invitation shall be removed from the register.</p>
+
+      <p><strong>Family Membership:</strong> Family membership is available to the partner and any children of the main member living at the same permanent address. They will be issued a membership card and will be eligible to take part in Club events with or without the main member.</p>
+
+      <p><strong>Expulsion of members:</strong> The Club may withdraw a persons membership if their behaviour is deemed not in the interest of the Club.</p>
+
+      <p><strong>Use of Club name and address:</strong> The name and address if the Club shall not be given by a member as their own address for any trade, advertising or business purposes, or in connection with any legal proceedings unless permission has been given by the Chairman.</p>
+
+      <p><strong>Observance and interpretation of these rules:</strong> Every member binds himself/herself to abide by the rules of the Club.</p>
+
+      <h4 class="text-danger fw-bold mt-5">General Guidelines</h4>
+
+      <ul class="list-disc ps-4">
+        <li>Upon receipt of your membership card, please write your name and membership number on it.</li>
+        <li>Please ensure that you write your membership number on any correspondence you send to the Club.</li>
+        <li>Always ensure that you write your membership number on the back of any cheques you send the Club.</li>
+        <li>Please do not staple cheques to any forms or paperwork.</li>
+      </ul>
+
+      <h4 class="text-danger fw-bold mt-4">General Rules of Club Events</h4>
+
+      <ul class="list-disc ps-4">
+        <li>Although welcome at all events, the Club cannot accept parental responsibility for members under 18 years of age.</li>
+        <li>The Club cannot accept responsibility for rides or attractions not operating for whatever reason.</li>
+        <li>No refunds can be made for non-attendance.</li>
+        <li>The Club retains the right to change/cancel any part of a trip itinerary.</li>
+        <li>Transport to, from and between Parks is not included or supplied by the Club unless specified on the invitation.</li>
+        <li>All activities are at your own risk (Unless negligence on behalf of the parks).</li>
+        <li>It is the members' responsibility to ensure that on trips outside the UK they have correct documentation (e.g. passport, visas).</li>
+        <li>Members are responsible for observing Parks rules & regulations. Club membership does not entitle members to special treatment other than those organised for the event. Please respect this.</li>
+      </ul>
+
+      <h4 class="text-danger fw-bold mt-4">RCCGB Riders Code of Conduct</h4>
+
+      <p>
+        The Roller Coaster Club of Great Britain has for 30 years promoted the amusement park industry as a <strong>fun and safe recreation</strong>. We strive to promote safe riding at all times.
+      </p>
+
+      <p>
+        The RCCGB has a <strong>'Riders Code of Conduct'</strong> and will take action against any member who does not share the same level of importance on safety. This would include any form of unsafe riding, such as, keeping lap bars loose, removing seat belts, taking cameras on rides where not permitted, etc. The negative publicity of rule breaking is immense and damaging to the industry and also tarnishes the good reputation of established enthusiast groups who have spent many years building good and trusted relationships with parks all over the world.
+      </p>
+
+      <p class="text-danger fw-bold">
+        Any member found riding in an unsafe manner or actively breaking published parks rules will be immediately expelled from the RCCGB's organised event (if applicable) and membership may be revoked. This is in addition to any park sanctions. By joining the RCCGB and booking any organised events you are accepting the RCCGB Riders Code of Conduct.
+      </p>
+
+      <p>
+        I am pleased to say that since the Club's formation in 1988 no action has ever had to be taken against members. Let's keep this up and continue to promote the industry as fun and safe and ensure the RCCGB remains one of the industry's most popular coaster enthusiasts Clubs all over the world.
+      </p>
+
+      <p class="fst-italic fw-bold text-primary fs-5">
+        "The RCCGB - Serious about fun!"
+      </p>
+
+      <p class="fw-bold">Andy Hine MBE<br>RCCGB Chairman</p>
+    </div>
   </div>
 </div>
 
-            <!-- Right: Text for each logo -->
-            <div class="flex-grow-1">
-              <div id="text1" class="history-text">
-                <p>The Roller Coaster Club of Great Britain was founded in 1988 with the original club logo symbolising the start of the journey.</p>
-              </div>
-              <div id="text2" class="history-text d-none">
-                <p>In 2003, the club celebrated its 15th anniversary with a special logo marking this milestone.</p>
-              </div>
-              <div id="text3" class="history-text d-none">
-                <p>The club logo evolved further in 2005 reflecting the club’s growing community and activities.</p>
-              </div>
-              <div id="text4" class="history-text d-none">
-                <p>Celebrating 20 years in 2008, the club proudly introduced this commemorative logo.</p>
-              </div>
-              <div id="text5" class="history-text d-none">
-                <p>The logo was redesigned again in 2010 to keep pace with modern branding standards.</p>
-              </div>
-              <div id="text6" class="history-text d-none">
-                <p>The 25th anniversary in 2013 was celebrated with a special edition logo, marking a quarter century of coaster enthusiasm.</p>
-              </div>
-              <div id="text7" class="history-text d-none">
-                <p>In 2018, the club celebrated its 30th anniversary, commemorated by this modern logo.</p>
-              </div>
-
-              <div class="mt-4 border-top pt-3">
-                <p><strong>Roller Coasters</strong> - The King of the theme parks. The new steel high-tech marvels now rise more than four hundred feet in the air with loops, corkscrews, boomerangs and other white-knuckle elements. All over the world they reach speeds of over 100mph with eager thrill seekers being able to ride sitting, standing or even suspended beneath the track. So where it all start?</p>
-
-                <p>Well the roots are still with us today - lattice wooden structures, steep rises, swooping drops and loads of shake, rattle and roll! Modern steel looping roller coasters and traditional wooden roller coasters may look different, but they still have one thing in common; they both exist to excite and thrill the riders.</p>
-
-                <p>It all began in the 15th and 16th century with Russian Mountains. These were ice slides constructed in Russian towns, some even as high as 70 feet! Both the track and sleds were made of ice, with the seating being straw stuffed in chiselled hollows. The first roller coaster with wheels was invented in Russia also, built in 1784 in St. Petersburg. Soon after, the rides made their way to Paris, where the first coaster attraction was opened in 1804. There were of course problems in these early days. Wheels often fell off and the cars did not always stop at the end of the track!</p>
-
-                <p>It was in Paris where the phrase "roller coaster" originated. The early rides used tracks made of rollers and sleds with runners - creating roller coasting. The name then remained after runners were replaced with wheels.</p>
-
-                <p>The first ride to resemble modern roller coasters as we know them today, opened in Paris in 1817. Called Promenades Aeriennes (Aerial Walks), it had two separate, continuous tracks and the cars were locked onto the track. The first roller coaster in America was the Gravity Pleasure Switchback Railway built by La Marcus Thompson in 1884 at Coney Island, New York. The ride reached six miles per hour and riders sat sideways.</p>
-
-                <p>Inventors and designers were soon working to make coasters better and faster and in the 50's tubular steel track was being used allowing riders to eventually be turned upside down. Now as theme park attendances rise, wooden coasters have become popular once again, too. These grand visions of the past now reach greater speeds and heights and can match their steel counterparts for extreme thrills. The Club continually strives to encourage UK manufacturers to build new wooden roller coasters to compliment their steel counterparts.</p>
-
-                <p>Today there are over 2400 different coasters in the world. Parks all over the world compete to build the highest, the longest and the fastest rides. Cedar Point in Sandusky, Ohio (USA) a coaster enthusiasts dream with no less than 17 on offer, is home to Top Thrill Dragsters, a 420ft high steel coaster that reaches speeds of 120mph. In Australia they have The Tower of Terror, a 300ft free fall ride. Ring Racer in Germany hits 135mph and in the UK, Thorpe Park attracts riders with its record breaking 10 inversion coaster named Colossus. New designs are being introduced all the time. In recent years coasters have had their track turned upside down and the cars suspended underneath. Some coasters coaster have no seats and riders stand held in by special harnesses and more recently new 'laying down' coasters has been introduced. It seems that as long as we crave for more thrills the more the manufacturers try and give it to us.</p>
-
-                <p>This level of enthusiasm is shared the world over and roller coasters have a mass following. So in August 1988, The Roller Coaster Club of Great Britain was created. The main aims were to unite coaster enthusiasts in a social way, promote amusement parks as fun and safe places and encourage parks and manufacturers to create and install new and more exciting and daring rides.</p>
-
-                <p>Since then membership has grown and currently has well over 1000 members in around 15 different countries. These coaster crazy members go to great lengths to get their coaster fix. The average Club member will have ridden over 100 different coasters, spent 8 hours in each park they have visited and ridden around 40 times in one day! Some of the longer term members who have done many Club trips, especially abroad have now ridden well over 1000 different coasters worldwide!</p>
-
-                <p>Since the first club events back in the late 1980's they have remained the key part of being a member. Each year the club organises at least 6 events. These include favourites such as the 'Blackpool Bash', 'Loopathon', 'Mega-GLOW-Mania' and 'Summer Bash'. European trips have also been part of the trip calendar in past years with visits to Port Aventura, Six Flags Holland and Europa Park to name just a few. In 1993 the club did its first trip to the United States of America and this has since become a yearly event with one or two coach loads of members riding around 80-100 coasters in a 2 week trip!</p>
-
-                <p>So what about the future? How high or fast can roller coasters get? Well, the limits are really set by what the average human being can take. There comes a point where your body cannot take the extreme forces any longer and the ride no longer becomes fun. And the key word in the whole of the amusement industry is 'fun'. People visit parks to enjoy themselves, and forget about their daily troubles. You can go to work from Monday to Friday but come the weekend you can get away from it all and enter another world. A world of fun! Everywhere you look in a theme park people are smiling, laughing and of course screaming, with delight!</p>
-
-                <p>More and more coasters are appearing all over the world. Being a member of the RCCGB will mean that you get invitations to various Club trips to try out these new coasters. Attending trips is also the best way to make new friends who all share the same great pastime. Remember, on a Club trip each and every member is there to have a good time and within short while you'll soon feel part of the 'Coaster Crazy' crowd!</p>
-
-                <p>So no matter what other thrill rides or adrenalin activities are invented, roller coasters will always be the King of the park and as a Club we will always do our best to preserve existing coasters and encourage construction of new ones!</p>
-
-                <p><em>The ride may only last two minutes, but the memories last a lifetime!<br>— Andy Hine MBE, RCCGB Chairman.</em></p>
-              </div>
+        <!-- Club Policies -->
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="headingPolicies">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapsePolicies" aria-expanded="false" aria-controls="collapsePolicies">
+              Club Policies
+            </button>
+          </h2>
+          <div id="collapsePolicies" class="accordion-collapse collapse" aria-labelledby="headingPolicies" data-bs-parent="#infoAccordion">
+            <div class="accordion-body">
+              <p>The RCCGB follows all UK laws regarding privacy and data protection. Members' personal data will be kept confidential and only used for Club-related communications. The Club reserves the right to refuse membership or remove members for breach of the Code of Conduct or Club policies.</p>
             </div>
-
           </div>
         </div>
-      </div>
 
-      <!-- Code of Conduct -->
-      <div class="accordion-item">
-        <h2 class="accordion-header" id="headingConduct">
-          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseConduct" aria-expanded="false" aria-controls="collapseConduct">
-            Code of Conduct
-          </button>
-        </h2>
-        <div id="collapseConduct" class="accordion-collapse collapse" aria-labelledby="headingConduct" data-bs-parent="#infoAccordion">
-          <div class="accordion-body">
-            <p>Members are expected to behave respectfully and responsibly at all club events and parks.</p>
-            <ul>
-              <li>Respect park rules and staff</li>
-              <li>Be considerate of other members</li>
-              <li>Follow safety instructions on rides</li>
-              <li>Promote a positive and friendly atmosphere</li>
-            </ul>
-          </div>
-        </div>
       </div>
-
-      <!-- Discounts & Offers -->
-      <div class="accordion-item">
-        <h2 class="accordion-header" id="headingDiscounts">
-          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseDiscounts" aria-expanded="false" aria-controls="collapseDiscounts">
-            Discounts &amp; Offers
-          </button>
-        </h2>
-        <div id="collapseDiscounts" class="accordion-collapse collapse" aria-labelledby="headingDiscounts" data-bs-parent="#infoAccordion">
-          <div class="accordion-body">
-            <p>Members enjoy exclusive discounts at partner theme parks and attractions throughout the year. Offers are updated regularly in our AIRtime ONline newsletter and website.</p>
-            <ul>
-              <li>Discounted entry tickets</li>
-              <li>Merchandise deals</li>
-              <li>Exclusive event prices</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <!-- FAQ -->
-      <div class="accordion-item">
-        <h2 class="accordion-header" id="headingFAQ">
-          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFAQ" aria-expanded="false" aria-controls="collapseFAQ">
-            FAQ
-          </button>
-        </h2>
-        <div id="collapseFAQ" class="accordion-collapse collapse" aria-labelledby="headingFAQ" data-bs-parent="#infoAccordion">
-          <div class="accordion-body">
-            <p><strong>Q:</strong> How do I join the club?<br>
-              <strong>A:</strong> Visit the Join page and complete the membership form.</p>
-            <p><strong>Q:</strong> Can I attend club events as a non-member?<br>
-              <strong>A:</strong> Generally, events are for members only to maintain safety and organisation.</p>
-            <p><strong>Q:</strong> How can I renew my membership?<br>
-              <strong>A:</strong> Visit the Renew page or contact the Membership Secretary.</p>
-          </div>
-        </div>
-      </div>
-
     </div>
-  </main>
 
-  <!-- Footer -->
-  <footer class="bg-primary text-white text-center py-3 mt-5">
-    <small>&copy; 2025 Roller Coaster Club of Great Britain (RCCGB)</small>
-  </footer>
+    
+  <!-- Logo Info Overlay -->
+  <div id="logoInfoOverlay" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="logoInfoTitle">
+    <div id="logoInfoPanel" tabindex="-1">
+      <button id="logoInfoClose" aria-label="Close">&times;</button>
+      <img id="logoInfoImage" src="" alt="" />
+      <div id="logoInfoText"></div>
+    </div>
+  </div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   <script>
-    // Interactive logos: switch displayed text on click
-    document.querySelectorAll('.logo-item').forEach(item => {
-      item.addEventListener('click', () => {
-        // Remove 'selected' from all logos
-        document.querySelectorAll('.logo-item').forEach(i => i.classList.remove('selected'));
-        // Hide all text divs
-        document.querySelectorAll('.history-text').forEach(t => t.classList.add('d-none'));
-        // Add selected class to clicked logo
-        item.classList.add('selected');
-        // Show corresponding text
-        const textId = item.getAttribute('data-text');
-        document.getElementById(textId).classList.remove('d-none');
+    document.addEventListener("DOMContentLoaded", function() {
+      const logos = document.querySelectorAll(".logo-item");
+      const overlay = document.getElementById("logoInfoOverlay");
+      const infoImage = document.getElementById("logoInfoImage");
+      const infoText = document.getElementById("logoInfoText");
+      const closeBtn = document.getElementById("logoInfoClose");
+
+      logos.forEach(logo => {
+        logo.addEventListener("click", () => showInfo(logo));
+        logo.addEventListener("keypress", e => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            showInfo(logo);
+          }
+        });
       });
+
+      closeBtn.addEventListener("click", () => {
+        overlay.style.display = "none";
+        overlay.setAttribute("aria-hidden", "true");
+      });
+
+      overlay.addEventListener("click", (e) => {
+        if (e.target === overlay) {
+          overlay.style.display = "none";
+          overlay.setAttribute("aria-hidden", "true");
+        }
+      });
+
+      function showInfo(logo) {
+        const textId = logo.getAttribute("data-text");
+        const imgSrc = logo.getAttribute("data-img");
+        const textContent = document.getElementById(textId)?.innerHTML || "";
+        infoImage.src = imgSrc;
+        infoImage.alt = logo.querySelector("small")?.innerText || "Logo image";
+        infoText.innerHTML = textContent;
+        overlay.style.display = "flex";
+        overlay.setAttribute("aria-hidden", "false");
+        // Focus panel for accessibility
+        document.getElementById("logoInfoPanel").focus();
+      }
     });
   </script>
 </body>
