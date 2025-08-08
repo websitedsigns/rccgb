@@ -64,7 +64,7 @@
 /* ===== Social Icons ===== */
 .social-icons {
   display: flex;
-  size: 1rem;
+  font-size: 1rem;
   gap: 1rem;
   z-index: 1;
 }
@@ -92,23 +92,24 @@
   align-items: center;
   justify-content: center;
   font-weight: bold;
-  font-size: 1rem;
-  box-shadow: 0 0 18px rgba(0,0,0,0.3);
+  box-shadow: 0 0 28px rgba(0,0,0,0.3);
   cursor: pointer;
   z-index: 999;
   animation: ticker-move 5s linear infinite;
   overflow: hidden;
   white-space: nowrap;
-  padding-left: 90px;
+  padding-left: 50px;
   padding-right: 40px;
+  border-color: #eeeeeb;
 }
 #woodathon-sticker::after {
-  content: "Book Woodathon Now";
-  margin-left: 20px;
+  content: "Woodathon 2025: Book Now";
   color: #eeeeeb;
-  font-size: 1.5rem;
   font-weight: bold;
+  font-size: 1rem;
 }
+
+
 
 #woodathon-sticker::before {
   content: "";
