@@ -1,524 +1,278 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>RCCGB - Trips</title>
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="styles.css" />
-    <style>
-      /* Hover effects for trip cards */
-      .trip-card:hover .overlay {
-        filter: brightness(0.35) contrast(1.1);
-        transition: 0.4s ease-in-out;
-      }
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>RCCGB - Trips</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* Logo for trips list */
+    .trip-logo {
+      height: 30px;
+      width: auto;
+      margin-right: 10px;
+      object-fit: contain;
+    }
 
-      /* Button animations */
-      .btn-outline-light {
-        position: relative;
-        overflow: hidden;
-        transition: all 0.3s ease;
-      }
+    /* Modern modal header to match navbar */
+    .modal-header-modern {
+      background: linear-gradient(90deg, #00247d, #0052cc);
+      color: #fff;
+      border-bottom: 2px solid rgba(255,255,255,0.2);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      border-top-left-radius: 0.5rem;
+      border-top-right-radius: 0.5rem;
+    }
 
-      .btn-outline-light::after {
-        content: "";
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        width: 300%;
-        height: 300%;
-        background: rgba(255, 255, 255, 0.1);
-        transform: translate(-50%, -50%) scale(0);
-        transition: transform 0.5s ease, opacity 0.5s ease;
-        border-radius: 50%;
-      }
+    /* Modern card overlay text */
+    .trip-card .overlay {
+      background-color: rgba(0,0,0,0.5);
+    }
 
-      .btn-outline-light:hover::after {
-        transform: translate(-50%, -50%) scale(1);
-        opacity: 0;
-      }
+    /* Modal body images */
+    .modal-body img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 0.5rem;
+    }
 
-      /* Modal section fade-in animation */
-      .modal-section {
-        opacity: 0;
-        transform: translateY(20px);
-        transition: all 0.6s ease-out;
-      }
+    /* Responsive flex layout for images and text in modal sections */
+    .modal-section {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
 
-      .modal.show .modal-section {
-        opacity: 1;
-        transform: translateY(0);
+    @media(min-width: 768px){
+      .modal-section.flex-md-row {
+        flex-direction: row;
       }
+      .modal-section.flex-md-row > img {
+        flex-shrink: 0;
+      }
+    }
 
-      /* Smooth image hover scale effect */
-      .modal-section img:hover {
-        transform: scale(1.05);
-        transition: transform 0.3s ease-in-out;
-      }
+    /* Alternating backgrounds for readability */
+    .modal-section.bg-alt {
+      background-color: #f9f9f9;
+    }
 
-      /* Subtle shadow for modal sections */
-      .modal-section {
-        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
-        border-radius: 0.5rem;
-      }
+    .modal-section.bg-main {
+      background-color: #ffffff;
+    }
 
-      /* Logo for trips list */
-      .trip-logo {
-        height: 30px;
-        width: auto;
-        margin-right: 10px;
-        object-fit: contain;
-      }
+    /* Horizontal scroll for images on mobile */
+    .image-row {
+      display: flex;
+      overflow-x: auto;
+      gap: 0.5rem;
+      padding-bottom: 0.5rem;
+      scroll-behavior: smooth;
+    }
+    .image-row img {
+      flex: 0 0 auto;
+      max-width: 45%;
+      border-radius: 0.5rem;
+    }
 
-      /* Modern modal header to match navbar */
-      .modal-header-modern {
-        background: linear-gradient(90deg, #00247d, #0052cc);
-        color: #fff;
-        border-bottom: 2px solid rgba(255, 255, 255, 0.2);
-        position: sticky;
-        top: 0;
-        z-index: 10;
-        border-top-left-radius: 0.5rem;
-        border-top-right-radius: 0.5rem;
-      }
+    /* Hide scrollbar in Webkit browsers */
+    .image-row::-webkit-scrollbar {
+      display: none;
+    }
+    .image-row {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
 
-      /* Modern card overlay text */
-      .trip-card .overlay {
-        background-color: rgba(0, 0, 0, 0.5);
-      }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg fixed-top navbar-custom shadow-sm">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">
+        <img src="images/logo.png" alt="RCCGB Logo" style="height:50px;width:auto"/>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="Toggle navigation" style="border-color:white">
+        <span class="navbar-toggler-icon" style="filter: invert(1)"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="join.html">Join</a></li>
+          <li class="nav-item"><a class="nav-link" href="renew.html">Renew</a></li>
+          <li class="nav-item"><a class="nav-link" href="events.html">Events</a></li>
+          <li class="nav-item"><a class="nav-link active" href="trips.html">Trips</a></li>
+          <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+          <li class="nav-item"><a class="nav-link" href="info.html">Club Information</a></li>
+          <li class="nav-item"><a class="nav-link" href="archives.html">Archives</a></li>
+          <li class="nav-item"><a class="nav-link" href="links.html">Useful Links</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
 
-      /* Modal body images */
-      .modal-body img {
-        max-width: 100%;
-        height: auto;
-        border-radius: 0.5rem;
-      }
+  <!-- Hero Banner -->
+  <div class="hero-banner hero-banner-narrow position-relative text-center" style="height:250px;background:#00247d;display:flex;align-items:center;justify-content:center;">
+    <img src="images/logo.png" alt="RCCGB Logo" style="height:130px;width:auto" class="d-block mx-auto"/>
+  </div>
 
-      /* Responsive flex layout for images and text in modal sections */
-      .modal-section {
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-      }
+  <!-- Trips Section -->
+  <section class="py-5">
+    <div class="container">
+      <h1 class="hero-title text-center mb-3">Past Trips</h1>
+      <h2 class="text-center fw-bold text-primary mb-4">Relive some of our amazing adventures!</h2>
 
-      @media (min-width: 768px) {
-        .modal-section.flex-md-row {
-          flex-direction: row;
-        }
-        .modal-section.flex-md-row > img {
-          flex-shrink: 0;
-        }
-      }
-
-      /* Alternating backgrounds for readability */
-      .modal-section.bg-alt {
-        background-color: #f9f9f9;
-      }
-
-      .modal-section.bg-main {
-        background-color: #ffffff;
-      }
-    </style>
-  </head>
-  <body>
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg fixed-top navbar-custom shadow-sm">
-      <div class="container">
-        <a class="navbar-brand" href="index.html">
-          <img
-            src="images/logo.png"
-            alt="RCCGB Logo"
-            style="height: 50px; width: auto"
-          />
-        </a>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNav"
-          aria-label="Toggle navigation"
-          style="border-color: white"
-        >
-          <span class="navbar-toggler-icon" style="filter: invert(1)"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav ms-auto">
-            <li class="nav-item">
-              <a class="nav-link" href="index.html">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="join.html">Join</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="renew.html">Renew</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="events.html">Events</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link active" href="trips.html">Trips</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="contact.html">Contact</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="info.html">Club Information</a>
-            </li>
-            </li>
-          </ul>
+      <!-- Trip Cards -->
+      <div class="trip-card card mb-3 shadow-sm border-primary position-relative overflow-hidden" style="border-radius:0">
+        <div class="position-absolute top-0 start-0 w-100 h-100" style="background:url('images/yarmouthcard.jpeg') no-repeat center center;background-size:cover;filter:brightness(0.5);z-index:1"></div>
+        <div class="row g-0 align-items-center position-relative text-white" style="z-index:2">
+          <div class="col-md-3 text-center p-2"></div>
+          <div class="col-md-7 p-3">
+            <h5 class="text-white fw-bold mb-1">Summer Bash 2025, Great Yarmouth</h5>
+            <p class="mb-0"><strong>June 2025</strong></p>
+            <button type="button" class="btn btn-outline-light btn-sm mt-2" data-bs-toggle="modal" data-bs-target="#yarmouthModal">More Info</button>
+          </div>
         </div>
       </div>
-    </nav>
 
-    <!-- Hero Banner -->
-    <div
-      class="hero-banner hero-banner-narrow position-relative text-center"
-      style="
-        height: 250px;
-        background: #00247d;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      "
-    >
-      <img
-        src="images/logo.png"
-        alt="RCCGB Logo"
-        style="height: 130px; width: auto"
-        class="d-block mx-auto"
-      />
+      <div class="trip-card card mb-3 shadow-sm border-primary position-relative overflow-hidden" style="border-radius:0">
+        <div class="position-absolute top-0 start-0 w-100 h-100" style="background:url('images/iconbash.jpeg') no-repeat center center;background-size:cover;filter:brightness(0.5);z-index:1"></div>
+        <div class="row g-0 align-items-center position-relative text-white" style="z-index:2">
+          <div class="col-md-3 text-center p-2"></div>
+          <div class="col-md-7 p-4">
+            <h5 class="text-white fw-bold mb-1">Blackpool Bash 2025</h5>
+            <p class="mb-0"><strong>April 2025</strong></p>
+            <button type="button" class="btn btn-outline-light btn-sm mt-2" data-bs-toggle="modal" data-bs-target="#blackpoolModal">More Info</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="trip-card card mb-3 shadow-sm border-primary position-relative overflow-hidden" style="border-radius:0">
+        <div class="position-absolute top-0 start-0 w-100 h-100" style="background:url('images/photo6.jpg') no-repeat center center;background-size:cover;filter:brightness(0.5);z-index:1"></div>
+        <div class="row g-0 align-items-center position-relative text-white" style="z-index:2">
+          <div class="col-md-3 text-center p-2"></div>
+          <div class="col-md-7 p-3">
+            <h5 class="text-white fw-bold mb-1">Folly Farm 2025</h5>
+            <p class="mb-0"><strong>August 2025</strong></p>
+            <button type="button" class="btn btn-outline-light btn-sm mt-2" data-bs-toggle="modal" data-bs-target="#follyModal">More Info</button>
+          </div>
+        </div>
+      </div>
     </div>
+  </section>
 
-    <!-- Trips Section -->
-    <section class="py-5">
-      <div class="container">
-        <h1 class="hero-title text-center mb-3">Past Trips</h1>
-        <h2 class="text-center fw-bold text-primary mb-4">
-          Relive some of our amazing adventures!
-        </h2>
+  <!-- Modals -->
 
-        <!-- Trip Cards -->
-        <div
-          class="trip-card card mb-3 shadow-sm border-primary position-relative overflow-hidden"
-          style="border-radius: 0"
-        >
-          <div
-            class="position-absolute top-0 start-0 w-100 h-100"
-            style="
-              background: url('images/yarmouthcard.jpeg') no-repeat center
-                center;
-              background-size: cover;
-              filter: brightness(0.5);
-              z-index: 1;
-            "
-          ></div>
-          <div
-            class="row g-0 align-items-center position-relative text-white"
-            style="z-index: 2"
-          >
-            <div class="col-md-3 text-center p-2"></div>
-            <div class="col-md-7 p-3">
-              <h5 class="text-white fw-bold mb-1">
-                Summer Bash 2025, Great Yarmouth
-              </h5>
-              <p class="mb-0"><strong>June 2025</strong></p>
-              <button
-                type="button"
-                class="btn btn-outline-light btn-sm mt-2"
-                data-bs-toggle="modal"
-                data-bs-target="#yarmouthModal"
-              >
-                More Info
-              </button>
+  <!-- Great Yarmouth Modal -->
+  <div class="modal fade" id="yarmouthModal" tabindex="-1" aria-labelledby="yarmouthModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header modal-header-modern">
+          <h5 class="modal-title fw-bold">Great Yarmouth Trip Report – June 2025</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body p-3">
+          <section class="modal-section bg-alt p-3 mb-3">
+            <p class="lead mb-0">Our summer seaside trip took us to <strong>Great Yarmouth</strong>, enjoying Joyland, the classic wooden Roller Coaster, and seafront attractions.</p>
+          </section>
+
+          <section class="modal-section bg-main p-3 mb-3">
+            <div class="alert alert-info rounded-3 mb-0">
+              <strong>Summer Bash 2025</strong><br>Great Yarmouth Pleasure Beach – <em>Saturday 28th June</em><br>
+              <span class="text-muted">125 members attended (our first visit since 2008!)</span>
             </div>
-          </div>
-        </div>
+          </section>
 
-        <div
-          class="trip-card card mb-3 shadow-sm border-primary position-relative overflow-hidden"
-          style="border-radius: 0"
-        >
-          <div
-            class="position-absolute top-0 start-0 w-100 h-100"
-            style="
-              background: url('images/iconbash.jpeg') no-repeat center center;
-              background-size: cover;
-              filter: brightness(0.5);
-              z-index: 1;
-            "
-          ></div>
-          <div
-            class="row g-0 align-items-center position-relative text-white"
-            style="z-index: 2"
-          >
-            <div class="col-md-3 text-center p-2"></div>
-            <div class="col-md-7 p-4">
-              <h5 class="text-white fw-bold mb-1">Blackpool Bash 2025</h5>
-              <p class="mb-0"><strong>April 2025</strong></p>
-              <button
-                type="button"
-                class="btn btn-outline-light btn-sm mt-2"
-                data-bs-toggle="modal"
-                data-bs-target="#blackpoolModal"
-              >
-                More Info
-              </button>
+          <!-- Horizontal image row for mobile -->
+          <section class="modal-section bg-alt p-4 mb-2">
+            <div class="image-row">
+              <img src="images/photo2.jpg" alt="Wooden Roller Coaster">
+              <img src="images/rc1.png" alt="Wooden Roller Coaster">
+              <img src="images/rc2.png" alt="Wooden Roller Coaster">
+              <img src="images/rc3.png" alt="Wooden Roller Coaster">
+              <img src="images/rc4.png" alt="Wooden Roller Coaster">
+              <img src="images/rc5.png" alt="Wooden Roller Coaster">
+              <img src="images/rc6.png" alt="Wooden Roller Coaster">
+              <img src="images/rc7.png" alt="Wooden Roller Coaster">
+              <img src="images/rc8.png" alt="Wooden Roller Coaster">
+              <img src="images/spin.png" alt="Wooden Roller Coaster">
+              <img src="images/horse.png" alt="Wooden Roller Coaster">
+              <img src="images/dog.png" alt="Ori">
+              <img src="images/photo4.jpg" alt="John Musk">
+              <img src="images/photo5.jpg" alt="Joyland Rides">
+              <img src="images/danGeorgeneptune.png" alt="Joyland Rides">
+              <img src="images/tubs.png" alt="Joyland Rides">
+              <img src="images/space.png" alt="Joyland Rides">
+              <img src="images/snails.png" alt="Joyland Rides">
+
+
+
+
+
+
             </div>
-          </div>
-        </div>
-
-        <div
-          class="trip-card card mb-3 shadow-sm border-primary position-relative overflow-hidden"
-          style="border-radius: 0"
-        >
-          <div
-            class="position-absolute top-0 start-0 w-100 h-100"
-            style="
-              background: url('images/photo6.jpg') no-repeat center center;
-              background-size: cover;
-              filter: brightness(0.5);
-              z-index: 1;
-            "
-          ></div>
-          <div
-            class="row g-0 align-items-center position-relative text-white"
-            style="z-index: 2"
-          >
-            <div class="col-md-3 text-center p-2"></div>
-            <div class="col-md-7 p-3">
-              <h5 class="text-white fw-bold mb-1">Folly Farm 2025</h5>
-              <p class="mb-0"><strong>August 2025</strong></p>
-              <button
-                type="button"
-                class="btn btn-outline-light btn-sm mt-2"
-                data-bs-toggle="modal"
-                data-bs-target="#follyModal"
-              >
-                More Info
-              </button>
+            <div class="mt-3">
+              <h6 class="fw-bold text-primary">Exclusive Ride Session & Joyland Add-On</h6>
+              <p>Members enjoyed ERS, behind-the-scenes tours, and later visited Joyland rides including Super Snails, Tyrolean Tubs, Jet Cars, and Neptune’s Kingdom.</p>
             </div>
-          </div>
-        </div>
-      </div>
-    </section>
+          </section>
 
-    <!-- Modals -->
-    <!-- Great Yarmouth -->
-    <div
-      class="modal fade"
-      id="yarmouthModal"
-      tabindex="-1"
-      aria-labelledby="yarmouthModalLabel"
-      aria-hidden="true"
-    >
-      <div
-        class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable"
-      >
-        <div class="modal-content">
-          <div class="modal-header modal-header-modern">
-            <h5 class="modal-title fw-bold">
-              Great Yarmouth Trip Report – June 2025
-            </h5>
-            <button
-              type="button"
-              class="btn-close btn-close-white"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
-          </div>
-
-          <div class="modal-body p-3">
-            <section class="modal-section bg-alt p-3 mb-3 flex-md-row">
-              <img src="images/yarmouthcard.jpeg" alt="Great Yarmouth" />
-              <div>
-                <p class="lead mb-0">
-                  Our summer seaside trip took us to
-                  <strong>Great Yarmouth</strong>, where members enjoyed
-                  Joyland, the classic wooden Roller Coaster at the Pleasure
-                  Beach, and a full day of fun at the seafront attractions.
-                </p>
-              </div>
-            </section>
-
-            <section class="modal-section bg-main p-3 mb-3">
-              <div class="alert alert-info rounded-3 mb-0">
-                <strong>Summer Bash 2025</strong><br />Great Yarmouth Pleasure
-                Beach – <em>Saturday 28th June</em><br />
-                <span class="text-muted"
-                  >125 members attended (our first visit since 2008!)</span
-                >
-              </div>
-            </section>
-
-            <section
-              class="modal-section bg-alt p-3 mb-3 flex-md-row align-items-center"
-            >
-              <img
-                src="images/photo2.jpg"
-                alt="Wooden Roller Coaster"
-                style="max-width: 250px"
-              />
-              <div>
-                <h6 class="fw-bold text-primary">
-                  Exclusive Ride Session (ERS)
-                </h6>
-                <p>
-                  We met at the Pleasure Beach at 9:30am. Wristbands issued,
-                  bonus crazy golf token! Then the legendary
-                  <strong>1932 wooden Roller Coaster</strong>.
-                </p>
-                <p>
-                  Small groups got <em>behind-the-scenes tour</em> with
-                  engineers explaining backstage operations.
-                </p>
-              </div>
-            </section>
-
-            <section
-              class="modal-section bg-main p-3 mb-3 flex-md-row align-items-start"
-            >
-              <div>
-                <h6 class="fw-bold text-primary">Freetime in the Park</h6>
-                <p>
-                  After ERS, members enjoyed 3 other coasters and thrill rides.
-                  Special guests:
-                </p>
-                <ul class="mb-0">
-                  <li>
-                    <strong>"Ori"</strong>, with trip badge – all day (not
-                    coaster!)
-                  </li>
-                  <li>
-                    <strong>John Musk</strong>, celebrating
-                    <em>78th birthday</em>, founding member.
-                  </li>
-                </ul>
-              </div>
-              <div class="d-flex flex-column gap-2 text-center">
-                <img src="images/dog.png" alt="Ori" />
-                <img src="images/photo4.jpg" alt="John Musk" />
-              </div>
-            </section>
-
-            <section
-              class="modal-section bg-alt p-3 mb-3 flex-md-row align-items-start"
-            >
-              <img src="images/photo5.jpg" alt="Joyland Rides" />
-              <div>
-                <h6 class="fw-bold text-primary">Joyland Add-On</h6>
-                <p>
-                  After Pleasure Beach closed,
-                  <strong>102 members</strong> visited Joyland, just a short
-                  walk along the prom. Nostalgic rides included:
-                </p>
-                <ul class="mb-0">
-                  <li>Super Snails (since 1949)</li>
-                  <li>
-                    Tyrolean Tubs – last operating Virginia Reel ride in the
-                    world
-                  </li>
-                  <li>Jet Cars, Neptune’s Kingdom, and a small coaster</li>
-                </ul>
-                <img src="images/photo1.jpg" alt="John Musk" />
-                <img src="images/danGeorgeneptune.png" alt="John Musk" />
-              </div>
-            </section>
-
-            <section class="modal-section bg-main p-3 mb-3 text-center">
-              <h6 class="fw-bold text-primary">Final Thoughts</h6>
-              <p>
-                Fantastic day visiting both parks. Warmly welcomed by staff and
-                engineers. Sun even came out! Thanks to all attendees, including
-                18 first-timers!
-              </p>
-            </section>
-          </div>
+          <section class="modal-section bg-main p-3 mb-3 text-center">
+            <h6 class="fw-bold text-primary">Final Thoughts</h6>
+            <p>Fantastic day visiting both parks. Warmly welcomed by staff and engineers. Thanks to all attendees, including 18 first-timers!</p>
+          </section>
         </div>
       </div>
     </div>
+  </div>
 
-    <!-- Blackpool Modal -->
-    <div
-      class="modal fade"
-      id="blackpoolModal"
-      tabindex="-1"
-      aria-labelledby="blackpoolModalLabel"
-      aria-hidden="true"
-    >
-      <div
-        class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable"
-      >
-        <div class="modal-content">
-          <div class="modal-header modal-header-modern">
-            <h5 class="modal-title fw-bold">
-              Blackpool Bash Trip Report - April 2025
-            </h5>
-            <button
-              type="button"
-              class="btn-close btn-close-white"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
-          </div>
-          <div class="modal-body p-3">
-            <section class="modal-section bg-alt p-3 mb-3 text-center">
-              <img src="images/iconbash.jpeg" alt="Blackpool Bash" />
-              <p>
-                The famous Blackpool Bash returned bigger than ever with
-                exclusive ride sessions, Q&As, live entertainment, and the
-                unforgettable Saturday night party!
-              </p>
-            </section>
-          </div>
+  <!-- Blackpool Modal -->
+  <div class="modal fade" id="blackpoolModal" tabindex="-1" aria-labelledby="blackpoolModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header modal-header-modern">
+          <h5 class="modal-title fw-bold">Blackpool Bash Trip Report - April 2025</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body p-3">
+          <section class="modal-section bg-alt p-3 mb-3">
+            <div class="image-row">
+              <img src="images/iconbash.jpeg" alt="Blackpool Bash">
+            </div>
+            <p class="mt-2">The famous Blackpool Bash returned bigger than ever with exclusive ride sessions, Q&As, live entertainment, and Saturday night party!</p>
+          </section>
         </div>
       </div>
     </div>
+  </div>
 
-    <!-- Folly Farm Modal -->
-    <div
-      class="modal fade"
-      id="follyModal"
-      tabindex="-1"
-      aria-labelledby="follyModalLabel"
-      aria-hidden="true"
-    >
-      <div
-        class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable"
-      >
-        <div class="modal-content">
-          <div class="modal-header modal-header-modern">
-            <h5 class="modal-title fw-bold">
-              Folly Farm Trip Report - August 2025
-            </h5>
-            <button
-              type="button"
-              class="btn-close btn-close-white"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
-          </div>
-          <div class="modal-body p-3">
-            <section class="modal-section bg-alt p-3 mb-3 text-center">
-              <img src="images/photo3.jpg" alt="Folly Farm" />
-              <p>
-                Brilliant family-friendly trip where members enjoyed classic
-                rides, the zoo, and plenty of time exploring the award-winning
-                Folly Farm attractions.
-              </p>
-            </section>
-          </div>
+  <!-- Folly Farm Modal -->
+  <div class="modal fade" id="follyModal" tabindex="-1" aria-labelledby="follyModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header modal-header-modern">
+          <h5 class="modal-title fw-bold">Folly Farm Trip Report - August 2025</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body p-3">
+          <section class="modal-section bg-alt p-3 mb-3">
+            <div class="image-row">
+              <img src="images/follyfarmlogo.jpg" alt="Folly Farm">
+            </div>
+            <p class="mt-2">Brilliant family-friendly trip where members enjoyed classic rides, the zoo, and exploring the award-winning Folly Farm attractions.</p>
+          </section>
         </div>
       </div>
     </div>
+  </div>
 
-    <!-- Footer -->
-    <footer class="footer-bg text-white py-3 text-center mt-4">
-      &copy; 2025 RCCGB - Roller Coaster Club of Great Britain
-    </footer>
+  <!-- Footer -->
+  <footer class="footer-bg text-white py-3 text-center mt-4">&copy; 2025 RCCGB - Roller Coaster Club of Great Britain</footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-  </body>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
 </html>
